@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspire Fachadas em ACM | Zona Norte SP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark: #1e1e1e;
+    --charcoal: #2a2a2a;
+    --panel: #313131;
+    --green: #5cb85c;
+    --green-light: #72d172;
+    --green-dark: #3d9140;
+    --white: #f5f5f2;
+    --gray: #9a9a9a;
+    --light-gray: #ececec;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 70px;
+    background: rgba(30,30,30,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(92,184,92,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--green); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green) !important;
+    color: #fff !important;
+    padding: 8px 22px;
+    border-radius: 3px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--green-dark) !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(92,184,92,0.035) 60px, rgba(92,184,92,0.035) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(92,184,92,0.035) 60px, rgba(92,184,92,0.035) 61px);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vw 4vw 6vw 8vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(92,184,92,0.1);
+    border: 1px solid rgba(92,184,92,0.3);
+    color: var(--green-light);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: normal; color: var(--green); display: block; }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--gray);
+    line-height: 1.75;
+    max-width: 430px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.76rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* Hero right */
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-acm-showcase {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 3px;
+  }
+  .acm-panel { background: var(--panel); position: relative; overflow: hidden; }
+  .acm-panel.main {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--charcoal);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: 8px;
+  }
+  .acm-panel.main::after {
+    content: 'INSPIRE';
+    position: absolute;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 4vw, 4rem);
+    color: var(--green);
+    letter-spacing: 4px;
+  }
+  .acm-panel.dark { background: #1a1a1a; }
+  .acm-panel.green-accent { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%); }
+  .acm-panel.mid { background: #404040; }
+  .acm-texture {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 8px);
+  }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 8vw; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 28px; height: 2px;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: -1px;
+    margin-bottom: 1.2rem;
+  }
+  h2 span { color: var(--green); }
+
+  /* SOBRE */
+  #sobre {
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .sobre-text p {
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .sobre-text p strong { color: var(--white); font-weight: 600; }
+
+  .sobre-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .feature-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--light-gray);
+  }
+  .feature-chip::before {
+    content: '';
+    display: inline-block;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(92,184,92,0.15);
+    border: 1.5px solid var(--green);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .feature-chip::after {
+    content: '';
+    position: absolute;
+    width: 5px; height: 5px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: -20px;
+    margin-top: 1px;
+  }
+
+  .sobre-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .sv-block { aspect-ratio: 1; background: var(--panel); position: relative; overflow: hidden; }
+  .sv-block:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 2 / 1;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  .sv-logo-display {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+  }
+  .sv-logo-display span { color: var(--green); }
+  .sv-sub { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gray); margin-top: 4px; }
+  .sv-block.green { background: var(--green); display: flex; align-items: center; justify-content: center; }
+  .sv-block.mid { background: #404040; }
+
+  /* PROVA SOCIAL */
+  #prova-social {
+    background: var(--dark);
+    padding: 4rem 8vw;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .prova-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .prova-label {
+    font-size: 0.72rem;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .prova-divider {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    min-width: 30px;
+  }
+  .prova-stats {
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .prova-stat { text-align: center; }
+  .prova-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 2.6rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+  .prova-num span { color: var(--green); }
+  .prova-desc {
+    font-size: 0.75rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SERVICES */
+  #servicos { background: var(--dark); }
+  .services-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+    gap: 2rem;
+  }
+  .services-intro p { color: var(--gray); max-width: 400px; line-height: 1.7; font-size: 1rem; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--charcoal);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: var(--panel); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 4rem;
+    color: rgba(92,184,92,0.07);
+    line-height: 1;
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+  }
+  .service-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 3px;
+    background: rgba(92,184,92,0.1);
+    border: 1px solid rgba(92,184,92,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .service-icon-wrap svg { width: 22px; height: 22px; stroke: var(--green); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .service-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.7rem;
+    color: var(--white);
+  }
+  .service-desc { font-size: 0.87rem; color: var(--gray); line-height: 1.7; }
+
+  /* PROCESSO */
+  #processo { background: var(--charcoal); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 12.5%; right: 12.5%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--green), rgba(92,184,92,0.08));
+    z-index: 0;
+  }
+  .step { padding: 0 1.5rem; position: relative; z-index: 1; }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  .step:not(:first-child) .step-num {
+    background: var(--panel);
+    border: 2px solid var(--green);
+    color: var(--green);
+  }
+  .step-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+  .step-desc { font-size: 0.83rem; color: var(--gray); line-height: 1.65; }
+
+  /* DEPOIMENTOS */
+  #depoimentos { background: var(--dark); }
+  .dep-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .dep-card {
+    background: var(--charcoal);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+  }
+  .dep-card::before {
+    content: '"';
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(92,184,92,0.12);
+    line-height: 1;
+  }
+  .dep-stars {
+    display: flex; gap: 3px; margin-bottom: 1rem;
+  }
+  .dep-stars svg { width: 14px; height: 14px; fill: var(--green); }
+  .dep-text {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .dep-author { display: flex; align-items: center; gap: 12px; }
+  .dep-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(92,184,92,0.15);
+    border: 1.5px solid rgba(92,184,92,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    color: var(--green);
+  }
+  .dep-name { font-weight: 600; font-size: 0.9rem; }
+  .dep-biz { font-size: 0.75rem; color: var(--gray); margin-top: 2px; }
+
+  /* DIFERENCIAIS */
+  #diferenciais { background: var(--charcoal); position: relative; overflow: hidden; }
+  #diferenciais::before {
+    content: 'INSPIRE';
+    position: absolute;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20vw;
+    color: rgba(255,255,255,0.018);
+    right: -2vw; top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: -5px;
+    pointer-events: none;
+  }
+  .diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+  .diferencial-card {
+    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .diferencial-card:hover { border-color: rgba(92,184,92,0.3); transform: translateY(-4px); }
+  .diferencial-icon-wrap {
+    width: 48px; height: 48px;
+    border-radius: 3px;
+    background: rgba(92,184,92,0.08);
+    border: 1px solid rgba(92,184,92,0.18);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+  .diferencial-icon-wrap svg { width: 22px; height: 22px; stroke: var(--green); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .diferencial-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.2rem;
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .diferencial-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+  /* CTA BANNER */
+  #cta-banner {
+    background: var(--green-dark);
+    padding: 5rem 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+    position: relative; overflow: hidden;
+  }
+  #cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 12px);
+  }
+  .cta-text { position: relative; z-index: 1; }
+  .cta-text h2 { font-size: clamp(2rem, 3.5vw, 3rem); color: #fff; margin-bottom: 0.5rem; }
+  .cta-text p { color: rgba(255,255,255,0.72); font-size: 1rem; line-height: 1.6; }
+  .btn-white {
+    position: relative; z-index: 1;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #fff;
+    color: var(--green-dark);
+    font-weight: 700; font-size: 0.88rem;
+    letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 15px 32px; border-radius: 3px;
+    text-decoration: none;
+    transition: transform 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .btn-white:hover { transform: translateY(-3px); background: rgba(255,255,255,0.92); }
+
+  /* CONTATO */
+  #contato {
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-info p { color: var(--gray); line-height: 1.75; margin-bottom: 2rem; font-size: 1rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 1rem 1.2rem;
+    background: var(--dark);
+    border-radius: 4px;
+    border-left: 3px solid var(--green);
+    text-decoration: none; color: inherit;
+    transition: background 0.2s;
+  }
+  .contact-item:hover { background: #222; }
+  .contact-item-icon {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-item-icon svg { width: 20px; height: 20px; stroke: var(--green); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-item-label { font-size: 0.7rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1.2px; }
+  .contact-item-value { font-weight: 600; font-size: 0.95rem; margin-top: 2px; }
+
+  /* urgency note */
+  .urgency-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    background: rgba(92,184,92,0.07);
+    border: 1px solid rgba(92,184,92,0.2);
+    border-radius: 4px;
+    font-size: 0.83rem;
+    color: var(--green-light);
+    line-height: 1.6;
+  }
+  .urgency-note strong { color: var(--green); }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--gray);
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    padding: 12px 14px;
+    transition: border-color 0.2s;
+    outline: none; appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--green); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: var(--dark); }
+  .form-submit {
+    background: var(--green); color: #fff;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 15px 28px; border: none; border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+  }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .form-note { font-size: 0.75rem; color: var(--gray); text-align: center; line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: #161616;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 3rem 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.6rem;
+    letter-spacing: -0.5px; text-transform: uppercase;
+  }
+  .footer-logo span { color: var(--green); }
+  .footer-tagline { font-size: 0.72rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+  .footer-copy { font-size: 0.78rem; color: var(--gray); text-align: right; }
+  .footer-copy strong { color: var(--green); font-weight: 600; }
+
+  /* WA Float */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 99;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.55s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.7s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 4rem 6vw 5rem; }
+    #sobre, #contato { grid-template-columns: 1fr; gap: 3rem; }
+    .sobre-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .dep-grid { grid-template-columns: 1fr; }
+    .diferenciais-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    .services-intro { flex-direction: column; }
+    nav { padding: 0 4vw; }
+    .nav-links { display: none; }
+    .prova-stats { gap: 2rem; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 5rem 6vw; }
+    .diferenciais-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .prova-stats { gap: 1.5rem; }
+    #cta-banner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><span>i</span>NSPIRE</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#processo">Como Funciona</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#contato" class="nav-cta">Orçamento Grátis</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-left">
+    <div class="hero-badge">Referência na Zona Norte de São Paulo</div>
+    <h1>
+      Sua fachada<br>
+      vende mais<br>
+      <em>do que você imagina</em>
+    </h1>
+    <p class="hero-desc">
+      A primeira impressão do seu negócio acontece na calçada. Com fachadas profissionais em ACM, a Inspire transforma pontos comerciais comuns em referências visuais que atraem, convencem e convertem.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5511933403107?text=Ol%C3%A1%2C+gostaria+de+um+or%C3%A7amento+para+fachada+em+ACM" target="_blank" class="btn-primary">Solicitar Orçamento Grátis</a>
+      <a href="#servicos" class="btn-secondary">Ver Serviços</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Projetos entregues</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Anos no mercado</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Garantia de execução</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-acm-showcase">
+      <div class="acm-panel main">FACHADAS</div>
+      <div class="acm-panel dark"><div class="acm-texture"></div></div>
+      <div class="acm-panel green-accent"></div>
+      <div class="acm-panel accent"><div class="acm-texture"></div></div>
+      <div class="acm-panel mid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<div id="prova-social">
+  <div class="prova-inner">
+    <div class="prova-label">Números que falam por nós</div>
+    <div class="prova-divider"></div>
+    <div class="prova-stats">
+      <div class="prova-stat">
+        <div class="prova-num">500<span>+</span></div>
+        <div class="prova-desc">Fachadas instaladas</div>
+      </div>
+      <div class="prova-stat">
+        <div class="prova-num">10<span>+</span></div>
+        <div class="prova-desc">Anos de experiência</div>
+      </div>
+      <div class="prova-stat">
+        <div class="prova-num">4,9<span>/5</span></div>
+        <div class="prova-desc">Avaliação dos clientes</div>
+      </div>
+      <div class="prova-stat">
+        <div class="prova-num">48<span>h</span></div>
+        <div class="prova-desc">Para apresentar proposta</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-text">
+    <div class="section-label">Sobre a Inspire</div>
+    <h2>Quem olha pra sua fachada <span>hoje?</span></h2>
+    <p>
+      Centenas de pessoas passam na frente do seu comércio todos os dias. O que elas veem determina se entram ou não. Uma fachada mal cuidada ou genérica comunica descuido. <strong>Uma fachada profissional em ACM comunica credibilidade, qualidade e confiança</strong> antes mesmo de o cliente colocar o pé na porta.
+    </p>
+    <p>
+      A Inspire Fachadas em ACM foi fundada com um propósito: <strong>ajudar comércios e empresas da Zona Norte a venderem mais através de uma identidade visual forte</strong>. Do projeto à instalação, cada detalhe é tratado com rigor técnico e atenção ao resultado final.
+    </p>
+    <div class="sobre-features">
+      <div class="feature-chip">Projeto 100% personalizado</div>
+      <div class="feature-chip">Material ACM premium</div>
+      <div class="feature-chip">Instalação técnica especializada</div>
+      <div class="feature-chip">Garantia de serviço incluída</div>
+      <div class="feature-chip">Prazo acordado respeitado</div>
+      <div class="feature-chip">Atendimento presencial Zona Norte</div>
+    </div>
+  </div>
+  <div class="sobre-visual">
+    <div class="sv-block">
+      <div class="sv-logo-display"><span>i</span>NSPIRE</div>
+      <div class="sv-sub">Fachadas em ACM</div>
+    </div>
+    <div class="sv-block green"></div>
+    <div class="sv-block mid"></div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="services-intro">
+    <div>
+      <div class="section-label">Nossos Serviços</div>
+      <h2>Soluções em <span>ACM</span> do início ao fim</h2>
+    </div>
+    <p>Cuidamos de tudo: projeto, produção e instalação. Você não precisa se preocupar com nada além de escolher o resultado que quer alcançar.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <div class="service-title">Fachadas Comerciais em ACM</div>
+      <p class="service-desc">A solução mais impactante para lojas, clínicas, restaurantes e escritórios. Desenvolvemos uma fachada única que representa a essência do seu negócio e se destaca na rua.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h6"/><path d="M19 12l2 2-5 5-3-3 2-2 1 1 3-3z"/></svg>
+      </div>
+      <div class="service-title">Letras Caixa e Letreiros</div>
+      <p class="service-desc">Letras em alto relevo, caixas iluminadas e letreiros com presença visual marcante. Alta visibilidade durante o dia e à noite, ampliando o alcance do seu ponto.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </div>
+      <div class="service-title">Fachadas com Iluminação LED</div>
+      <p class="service-desc">Seu negócio visível e atraente mesmo depois do pôr do sol. A iluminação integrada à fachada aumenta o fluxo de clientes em horários de pico noturno.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="service-title">Projeto e Design</div>
+      <p class="service-desc">Antes de produzir qualquer coisa, criamos uma representação visual completa da sua fachada. Você aprova o projeto e só então avançamos para a execução.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="service-title">Instalação e Modernização</div>
+      <p class="service-desc">Equipe técnica qualificada para instalação segura e precisa. Também realizamos a modernização de fachadas existentes, renovando a imagem do seu negócio sem obra.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="service-title">Manutenção Preventiva</div>
+      <p class="service-desc">Proteja seu investimento com manutenção periódica. Garantimos que sua fachada mantenha aparência impecável por anos, preservando a credibilidade do seu ponto.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="section-label">Como Funciona</div>
+  <h2>Simples, <span>rápido</span> e sem burocracia</h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Você entra em contato</div>
+      <p class="step-desc">Uma mensagem no WhatsApp basta. Respondemos no mesmo dia e entendemos exatamente o que você precisa.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Visita técnica gratuita</div>
+      <p class="step-desc">Agendamos uma visita ao seu ponto para levantar medidas, analisar o espaço e entender sua marca. Sem custo.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Projeto e proposta</div>
+      <p class="step-desc">Você recebe o design da sua fachada e um orçamento detalhado em até 48 horas. Aprovação total antes de qualquer execução.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-title">Instalação e entrega</div>
+      <p class="step-desc">Nossa equipe executa com rapidez e limpeza. Na entrega, sua fachada está pronta para causar a melhor primeira impressão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="section-label">Depoimentos</div>
+  <h2>O que nossos clientes <span>dizem</span></h2>
+  <div class="dep-grid">
+
+    <div class="dep-card">
+      <div class="dep-stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="dep-text">Depois que instalei a fachada da Inspire, meu movimento aumentou visivelmente. Clientes novos me dizem que entraram porque o estabelecimento parecia confiável. Valeu cada centavo investido.</p>
+      <div class="dep-author">
+        <div class="dep-avatar">RS</div>
+        <div>
+          <div class="dep-name">Roberto Santos</div>
+          <div class="dep-biz">Ótica Visão — Santana</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dep-card">
+      <div class="dep-stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="dep-text">Profissionalismo do início ao fim. Fizeram o projeto, explicaram tudo, cumpriram o prazo e a limpeza no final foi impecável. Indico sem hesitar para qualquer comerciante da região.</p>
+      <div class="dep-author">
+        <div class="dep-avatar">MC</div>
+        <div>
+          <div class="dep-name">Marcos Carvalho</div>
+          <div class="dep-biz">Restaurante Sabor Mineiro — Tucuruvi</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dep-card">
+      <div class="dep-stars">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <p class="dep-text">Eu tinha medo de investir sem saber o resultado. O projeto visual que a Inspire apresentou tirou toda minha dúvida. A fachada ficou exatamente como mostrado, ou melhor. Serviço de alto nível.</p>
+      <div class="dep-author">
+        <div class="dep-avatar">AP</div>
+        <div>
+          <div class="dep-name">Ana Paula Lima</div>
+          <div class="dep-biz">Clínica Estética Renova — Freguesia do Ó</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="section-label">Por que escolher a Inspire</div>
+  <h2>O que nos separa da <span>concorrência</span></h2>
+  <div class="diferenciais-grid">
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="diferencial-title">Raízes na Zona Norte</div>
+      <p class="diferencial-desc">Conhecemos a região como ninguém. Isso se traduz em visita técnica rápida, logística eficiente e um atendimento que valoriza a sua realidade local.</p>
+    </div>
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="diferencial-title">Resposta no mesmo dia</div>
+      <p class="diferencial-desc">Nenhum cliente fica sem retorno. Respondemos no mesmo dia e agendamos a visita técnica em até 24 horas. Seu tempo tem valor, e nós sabemos disso.</p>
+    </div>
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="diferencial-title">Material com garantia</div>
+      <p class="diferencial-desc">Utilizamos exclusivamente ACM de primeira linha, com garantia formal de durabilidade. Resistente ao sol, à chuva e ao tempo — sem desbotar, sem empenar.</p>
+    </div>
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <div class="diferencial-title">Orçamento sem surpresas</div>
+      <p class="diferencial-desc">Detalhamos cada item do seu orçamento. O valor acordado é o valor cobrado — sem taxas escondidas, sem cobranças extras na hora da instalação.</p>
+    </div>
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="diferencial-title">Prazo que você pode confiar</div>
+      <p class="diferencial-desc">Planejamos cada etapa com precisão para cumprir o prazo combinado. Se você tem uma data de inauguração ou reforma, trabalhamos para garantir que ela seja cumprida.</p>
+    </div>
+
+    <div class="diferencial-card">
+      <div class="diferencial-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="diferencial-title">Suporte pós-instalação</div>
+      <p class="diferencial-desc">Nossa relação não termina quando a fachada fica pronta. Estamos disponíveis para qualquer ajuste, dúvida ou manutenção futura — é o que chamamos de parceria de verdade.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div id="cta-banner">
+  <div class="cta-text">
+    <h2>Cada dia sem uma boa fachada é um cliente a menos.</h2>
+    <p>A visita técnica é gratuita. O orçamento sai em 48 horas. O resultado é definitivo.</p>
+  </div>
+  <a href="https://wa.me/5511933403107?text=Ol%C3%A1%2C+vim+pelo+site+e+quero+agendar+uma+visita+t%C3%A9cnica+gratuita" target="_blank" class="btn-white">Agendar Visita Técnica Grátis</a>
+</div>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contact-info">
+    <div class="section-label">Fale Conosco</div>
+    <h2>Dê o primeiro <span>passo</span> agora</h2>
+    <p>Uma conversa rápida pode ser o começo da transformação do seu ponto comercial. Entre em contato e descubra o que a Inspire pode fazer pelo seu negócio.</p>
+    <div class="contact-items">
+      <a href="https://wa.me/5511933403107" target="_blank" class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">WhatsApp — Resposta rápida</div>
+          <div class="contact-item-value">(11) 93340-3107</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Área de Atendimento</div>
+          <div class="contact-item-value">Zona Norte — São Paulo, SP</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Horário de Atendimento</div>
+          <div class="contact-item-value">Seg–Sex: 8h às 18h · Sáb: 8h às 13h</div>
+        </div>
+      </div>
+    </div>
+    <div class="urgency-note">
+      <strong>Visita técnica gratuita e sem compromisso.</strong> Preencha o formulário ou mande uma mensagem no WhatsApp — nossa equipe entra em contato em até poucas horas.
+    </div>
+  </div>
+
+  <div>
+    <div class="section-label">Orçamento Gratuito</div>
+    <h2>Solicite seu <span>projeto</span></h2>
+    <br>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Seu Nome</label>
+          <input type="text" id="f-nome" placeholder="Ex: Carlos Silva">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" id="f-tel" placeholder="(11) 99999-9999">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nome da Empresa ou Comércio</label>
+        <input type="text" id="f-empresa" placeholder="Ex: Padaria do Bairro">
+      </div>
+      <div class="form-group">
+        <label>Tipo de Serviço</label>
+        <select id="f-servico">
+          <option value="">Selecione o que precisa...</option>
+          <option>Fachada Comercial em ACM</option>
+          <option>Letreiro e Letras Caixa</option>
+          <option>Fachada com Iluminação LED</option>
+          <option>Modernização de Fachada Existente</option>
+          <option>Projeto e Design</option>
+          <option>Manutenção</option>
+          <option>Ainda não sei — quero uma consultoria</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Observações (opcional)</label>
+        <textarea id="f-msg" placeholder="Descreva brevemente o seu ponto comercial ou o que deseja alcançar..."></textarea>
+      </div>
+      <button class="form-submit" onclick="sendWhatsApp()">Enviar e Falar com Especialista</button>
+      <p class="form-note">Sem spam. Suas informações são usadas apenas para preparar o seu orçamento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><span>i</span>NSPIRE</div>
+    <div class="footer-tagline">Fachadas em ACM · Zona Norte de São Paulo</div>
+  </div>
+  <div class="footer-copy">
+    © 2025 Inspire Fachadas em ACM. Todos os direitos reservados.<br>
+    <strong>(11) 93340-3107</strong>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a class="wa-float" href="https://wa.me/5511933403107?text=Ol%C3%A1%2C+quero+um+or%C3%A7amento+de+fachada+em+ACM" target="_blank" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+function sendWhatsApp() {
+  const nome = document.getElementById('f-nome').value.trim();
+  const tel = document.getElementById('f-tel').value.trim();
+  const empresa = document.getElementById('f-empresa').value.trim();
+  const servico = document.getElementById('f-servico').value;
+  const msg = document.getElementById('f-msg').value.trim();
+
+  if (!nome || !tel) {
+    alert('Por favor, preencha seu nome e WhatsApp para continuar.');
+    return;
+  }
+
+  let text = `Olá, Inspire! Vim pelo site e gostaria de um orçamento.%0A%0A`;
+  text += `*Nome:* ${encodeURIComponent(nome)}%0A`;
+  text += `*WhatsApp:* ${encodeURIComponent(tel)}%0A`;
+  if (empresa) text += `*Empresa/Comércio:* ${encodeURIComponent(empresa)}%0A`;
+  if (servico) text += `*Serviço de interesse:* ${encodeURIComponent(servico)}%0A`;
+  if (msg) text += `%0A*Observações:* ${encodeURIComponent(msg)}`;
+
+  window.open(`https://wa.me/5511933403107?text=${text}`, '_blank');
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.service-card, .diferencial-card, .step, .dep-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(28px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease, background 0.3s, border-color 0.3s';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
